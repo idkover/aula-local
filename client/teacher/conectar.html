@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Aula · Conectar alumnos</title>
+  </head>
+  <body>
+    <main class="connect">
+      <header class="connect-head">
+        <a class="connect-back" href="/teacher/clases">&larr; Mis clases</a>
+        <h1>Conectar alumnos</h1>
+      </header>
+
+      <p id="connect-error" class="connect-error" role="alert" hidden></p>
+
+      <section class="connect-main" aria-labelledby="connect-address-title">
+        <h2 id="connect-address-title" class="visually-hidden">Dirección para los alumnos</h2>
+        <p id="connect-primary" class="connect-url" aria-live="polite">Cargando…</p>
+        <div id="connect-qr" class="connect-qr" role="img" aria-label="Código QR con la dirección para los alumnos"></div>
+        <p class="connect-help">
+          Conéctate a la misma red Wi-Fi que la laptop, escanea el código y escribe el código de la clase que verás en el proyector.
+        </p>
+      </section>
+
+      <section id="connect-alt-box" class="connect-alt" hidden>
+        <h2>Otras direcciones</h2>
+        <p class="connect-alt-note">Si la primera no abre, prueba con una de estas (la laptop tiene varias redes):</p>
+        <ul id="connect-alt" class="connect-alt-list"></ul>
+      </section>
+    </main>
+    <script type="module" src="./conectar.ts"></script>
+  </body>
+</html>

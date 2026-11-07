@@ -1,0 +1,183 @@
+/* Conectar alumnos: pensada para proyectar. Texto grande, alto contraste y QR en blanco (siempre legible). */
+
+:root {
+  --bg: #141414;
+  --fg: #f5f5f5;
+  --muted: #b5b5b5;
+  --line: #333;
+  --card: #1d1d1d;
+  --link: #93c5fd;
+  --error-bg: #7f1d1d;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme='dark']) {
+    --bg: #f7f7f5;
+    --fg: #111;
+    --muted: #3f3f3f;
+    --line: #d4d4d4;
+    --card: #fff;
+    --link: #1d4ed8;
+    --error-bg: #fee2e2;
+  }
+}
+
+:root[data-theme='light'] {
+  --bg: #f7f7f5;
+  --fg: #111;
+  --muted: #3f3f3f;
+  --line: #d4d4d4;
+  --card: #fff;
+  --link: #1d4ed8;
+  --error-bg: #fee2e2;
+}
+
+:root[data-theme='dark'] {
+  --bg: #141414;
+  --fg: #f5f5f5;
+  --muted: #b5b5b5;
+  --line: #333;
+  --card: #1d1d1d;
+  --link: #93c5fd;
+  --error-bg: #7f1d1d;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.connect {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+  display: grid;
+  gap: 24px;
+  justify-items: center;
+  text-align: center;
+}
+
+.connect-head {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.connect-head h1 {
+  margin: 0;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+}
+
+.connect-back {
+  color: var(--link);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.connect-back:hover {
+  text-decoration: underline;
+}
+
+.connect-error {
+  margin: 0;
+  padding: 12px 16px;
+  border-radius: 8px;
+  background: var(--error-bg);
+  color: var(--fg);
+}
+
+.connect-main {
+  display: grid;
+  gap: 20px;
+  justify-items: center;
+}
+
+/* La dirección principal: lo primero que se lee desde el fondo del salón. */
+.connect-url {
+  margin: 0;
+  font-size: clamp(1.6rem, 5.5vw, 4.5rem); /* cabe http://192.168.xxx.xxx:3000/ en una línea */
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: 0.01em;
+  overflow-wrap: anywhere;
+}
+
+.connect-qr {
+  padding: 18px;
+  border-radius: 18px;
+  background: #fff;
+  line-height: 0;
+  width: min(72vmin, 480px);
+}
+
+.connect-qr svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.connect-help {
+  margin: 0;
+  max-width: 34em;
+  font-size: clamp(1.1rem, 2.4vw, 1.5rem);
+  line-height: 1.4;
+  color: var(--fg);
+}
+
+.connect-alt {
+  width: 100%;
+  max-width: 640px;
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--card);
+  text-align: left;
+}
+
+.connect-alt h2 {
+  margin: 0 0 6px;
+  font-size: 1.05rem;
+}
+
+.connect-alt-note {
+  margin: 0 0 10px;
+  color: var(--muted);
+}
+
+.connect-alt-list {
+  margin: 0;
+  padding-left: 20px;
+  font-size: 1.15rem;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.connect-alt-list li {
+  margin: 4px 0;
+}

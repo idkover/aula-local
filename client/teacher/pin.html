@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Aula · PIN del profesor</title>
+  </head>
+  <body>
+    <main class="pin-page">
+      <section id="pin-card" class="pin-card">
+        <h1>PIN del profesor</h1>
+
+        <p id="pin-loading" class="muted">Comprobando…</p>
+
+        <form id="pin-form" autocomplete="off" hidden>
+          <p class="muted">Ingresa el PIN para abrir la vista del profesor en este dispositivo.</p>
+          <label class="field">
+            PIN
+            <input
+              id="pin-input"
+              name="pin"
+              type="password"
+              inputmode="numeric"
+              pattern="[0-9]*"
+              minlength="4"
+              maxlength="8"
+              autocomplete="off"
+              required
+            />
+          </label>
+          <p id="pin-error" class="error-msg" role="alert" hidden></p>
+          <button id="pin-submit" type="submit" class="accent">Entrar</button>
+        </form>
+
+        <div id="pin-notset" hidden>
+          <p class="error-msg">Configura el PIN en la laptop (abre /teacher/clases en la laptop).</p>
+          <p class="muted">
+            Este dispositivo no es la laptop del aula. El PIN se crea una sola vez desde "Mis clases" en la laptop; después
+            podrás entrar desde aquí.
+          </p>
+        </div>
+
+        <p id="pin-error-load" class="error-msg" role="alert" hidden></p>
+      </section>
+    </main>
+    <script type="module" src="./pin.ts"></script>
+  </body>
+</html>

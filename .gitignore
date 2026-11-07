@@ -1,0 +1,15 @@
+node_modules/
+dist/
+data/
+*.log
+build/
+graphify-out/
+test-results/
+playwright-report/
+packaging/windows/launcher/bin/
+*.pem
+.env
+.env.*
+.dev*
+.claude/
+docs/PLAN-descargas-y-mac.md

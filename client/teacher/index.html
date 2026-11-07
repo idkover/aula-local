@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Aula · Profesor</title>
+  </head>
+  <body>
+    <main id="present" class="present" hidden>
+      <section class="stage">
+        <div id="question-bar" class="question-bar" role="status" hidden>
+          <span class="question-text">
+            <span id="question-label" class="question-label"></span>
+            <span id="question-prompt" class="question-prompt" hidden></span>
+          </span>
+          <span><strong id="submitted">0</strong> / <span id="submitted-of">0</span> entregados</span>
+          <span id="question-timer" class="timer" hidden></span>
+          <button id="close-question" type="button" class="danger">Cerrar pregunta</button>
+        </div>
+        <img id="slide" alt="Diapositiva actual" />
+        <div id="answer-grid" class="answer-grid" hidden></div>
+        <nav class="controls" aria-label="Diapositivas">
+          <button id="prev" type="button" aria-label="Anterior">◀</button>
+          <span id="counter" class="counter">– / –</span>
+          <button id="next" type="button" aria-label="Siguiente">▶</button>
+          <button id="open-question" type="button" class="accent">Lanzar pregunta</button>
+          <button id="toggle-view" type="button" class="secondary" hidden>Ver cuadrícula</button>
+          <button id="toggle-names" type="button" class="secondary" hidden>Mostrar nombres</button>
+          <div id="prepared-bar" class="prepared-bar" role="group" aria-label="Preguntas preparadas de esta diapositiva" hidden></div>
+        </nav>
+      </section>
+
+      <aside class="panel">
+        <p class="label">Código</p>
+        <p id="code" class="code">––––</p>
+        <div id="qr" class="qr" role="img" aria-label="Código QR para unirse"></div>
+        <p id="join-url" class="url"></p>
+        <details id="alt-urls-box" hidden>
+          <summary>¿No conecta? Otras direcciones</summary>
+          <ul id="alt-urls"></ul>
+        </details>
+        <p class="connected"><strong id="connected">0</strong> alumnos conectados</p>
+        <div class="actions">
+          <button id="show-qr" type="button">Proyectar QR</button>
+          <button id="open-projector" type="button" class="secondary">Abrir ventana de proyección</button>
+          <a id="to-library" class="button secondary" href="/teacher/clases">Mis clases</a>
+          <button id="end-class" type="button" class="danger">Terminar clase</button>
+        </div>
+        <p class="muted small">Teclado: ← → para cambiar de diapositiva, Q para el QR.</p>
+      </aside>
+    </main>
+
+    <div id="qr-overlay" class="qr-overlay" hidden>
+      <div class="qr-card">
+        <div id="qr-big" class="qr-big"></div>
+        <div>
+          <p class="big-instructions">Conéctate al Wi-Fi del aula y escanea el código</p>
+          <p id="qr-url" class="big-url"></p>
+          <p class="big-code">Código: <strong id="qr-code"></strong></p>
+          <p class="muted">Si tu celular dice “sin internet”, mantente conectado igual y apaga los datos móviles.</p>
+          <button id="close-qr" type="button">Cerrar (Esc)</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="spotlight" class="spotlight" role="dialog" aria-label="Respuesta en grande" hidden>
+      <div class="spotlight-bar">
+        <button id="spotlight-name" type="button" class="secondary">Mostrar nombre</button>
+        <button id="spotlight-close" type="button">Cerrar (Esc)</button>
+      </div>
+      <div id="spotlight-body" class="big-answer"></div>
+    </div>
+
+    <dialog id="question-dialog" class="question-dialog">
+      <form id="question-form" method="dialog">
+        <h2>Lanzar pregunta</h2>
+        <fieldset>
+          <legend>Tipo de respuesta</legend>
+          <label><input type="radio" name="type" value="overSlide" checked /> Pizarrón sobre la diapositiva</label>
+          <label><input type="radio" name="type" value="blank" /> Pizarrón en blanco</label>
+          <label><input type="radio" name="type" value="text" /> Respuesta corta de texto</label>
+        </fieldset>
+        <label class="row">
+          Límite de tiempo
+          <select name="time">
+            <option value="">Sin límite</option>
+            <option value="30">30 segundos</option>
+            <option value="60">1 minuto</option>
+            <option value="120">2 minutos</option>
+            <option value="300">5 minutos</option>
+          </select>
+        </label>
+        <label class="column">
+          Enunciado (opcional)
+          <textarea name="prompt" maxlength="500" rows="2" placeholder="Lo verán los alumnos arriba del pizarrón"></textarea>
+        </label>
+        <div class="dialog-actions">
+          <button type="submit" value="cancel" class="secondary">Cancelar</button>
+          <button type="submit" value="launch" class="accent">Lanzar</button>
+        </div>
+      </form>
+    </dialog>
+
+    <div id="offline" class="banner" role="status" hidden>Se perdió la conexión con el servidor. Reintentando…</div>
+
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>

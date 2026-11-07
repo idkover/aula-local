@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Aula · Guía de red</title>
+    <link rel="stylesheet" href="./guia-red.css" />
+  </head>
+  <body>
+    <main class="guia">
+      <header class="guia-head">
+        <a class="guia-back" href="/teacher/clases">&larr; Mis clases</a>
+        <h1>Guía de red</h1>
+        <p class="guia-lead">
+          Los alumnos entran a la clase desde sus celulares. Para eso, su celular y la laptop del profesor tienen que estar en la
+          misma red local. No hace falta internet.
+        </p>
+      </header>
+
+      <section class="guia-card">
+        <h2>1. Dos formas de conectar</h2>
+        <div class="guia-options">
+          <div class="guia-option">
+            <h3>Hotspot de la laptop</h3>
+            <p><strong>Para:</strong> probar con pocos equipos.</p>
+            <p><strong>Límite:</strong> en Windows, máximo 8 dispositivos.</p>
+            <p>Windows necesita una conexión activa en la laptop para encender el hotspot.</p>
+          </div>
+          <div class="guia-option guia-option-recommended">
+            <h3>Router propio sin internet <span class="guia-tag">Recomendado</span></h3>
+            <p><strong>Para:</strong> la clase completa, de 30 a 40 alumnos.</p>
+            <p>Cualquier router doméstico sirve. No necesita cable de internet.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="guia-card">
+        <h2>2. Configurar el router</h2>
+        <ul>
+          <li>Conecta la laptop y los celulares a la Wi-Fi de ese router.</li>
+          <li>El router no necesita internet para que la clase funcione.</li>
+          <li>
+            Desactiva "aislamiento de clientes" (o "AP isolation") si el router lo tiene. Suele estar en la configuración Wi-Fi
+            avanzada.
+          </li>
+          <li>
+            Si algún celular viejo no ve la red de 5 GHz, conéctalo a la de 2.4 GHz del mismo router. Da igual la banda: lo que
+            importa es que todos estén en el mismo router.
+          </li>
+        </ul>
+      </section>
+
+      <section class="guia-card">
+        <h2>3. Firewall de Windows</h2>
+        <p>
+          El instalador ya permite aula-local en redes privadas. Asegúrate de que la red esté marcada como <strong>Privada</strong>:
+        </p>
+        <p class="guia-path">Configuración → Red e Internet → Wi-Fi → la red → Tipo de perfil de red: <strong>Privada</strong></p>
+      </section>
+
+      <section class="guia-card">
+        <h2>4. Celulares que dicen "Red sin internet"</h2>
+        <p>
+          Es normal: la red no tiene internet. Mantén la conexión (elige "Mantener conexión" o "Usar esta red de todos modos") y
+          apaga los datos móviles para que el celular no salga por ellos.
+        </p>
+      </section>
+
+      <section class="guia-card">
+        <h2>5. Red de la escuela</h2>
+        <p>
+          Suelen aislar a los dispositivos, así que los celulares no ven la laptop. Usa tu propio router.
+        </p>
+      </section>
+
+      <section class="guia-card">
+        <h2>6. Si no carga</h2>
+        <ol>
+          <li>Revisa que el celular y la laptop estén en la misma red.</li>
+          <li>
+            Compara la dirección del celular con la de
+            <a href="/teacher/conectar">Conectar alumnos</a>. Deben coincidir.
+          </li>
+          <li>Reinicia aula-local desde el ícono junto al reloj.</li>
+        </ol>
+      </section>
+    </main>
+  </body>
+</html>

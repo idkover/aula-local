@@ -1,0 +1,624 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  background: #141414;
+  color: #f2f2f2;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+button {
+  font: inherit;
+  padding: 10px 16px;
+  border: 0;
+  border-radius: 8px;
+  background: #3b82f6;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+button.secondary {
+  background: #333;
+}
+
+.muted {
+  color: #9a9a9a;
+}
+
+.small {
+  font-size: 0.8rem;
+}
+
+/* ---------- Subida ---------- */
+
+.upload {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px 16px;
+}
+
+#upload-form {
+  width: 100%;
+  max-width: 460px;
+  display: grid;
+  gap: 16px;
+}
+
+#upload-form h1 {
+  margin: 0;
+}
+
+.file {
+  display: block;
+  padding: 28px 16px;
+  border: 2px dashed #555;
+  border-radius: 12px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.file input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+
+.file:focus-within {
+  border-color: #3b82f6;
+}
+
+/* ---------- Presentación ---------- */
+
+.present {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  /* Una sola fila del alto de la ventana: si el panel no cabe, hace scroll en vez de empujar los controles. */
+  grid-template-rows: minmax(0, 1fr);
+}
+
+.stage {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  background: #000;
+}
+
+#slide {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  min-height: 0;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  padding: 10px;
+  background: #1b1b1b;
+}
+
+.controls button {
+  min-width: 64px;
+}
+
+.counter {
+  min-width: 80px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 20px;
+  overflow-y: auto;
+  border-left: 1px solid #2a2a2a;
+}
+
+.panel p {
+  margin: 0;
+}
+
+.label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #9a9a9a;
+}
+
+.code {
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  font-variant-numeric: tabular-nums;
+}
+
+.qr {
+  width: 100%;
+  background: #fff;
+  border-radius: 8px;
+  padding: 6px;
+}
+
+.qr svg,
+.qr-big svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.url {
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 0.9rem;
+  word-break: break-all;
+}
+
+details {
+  font-size: 0.85rem;
+  color: #bbb;
+}
+
+details ul {
+  margin: 6px 0 0;
+  padding-left: 18px;
+  font-family: ui-monospace, Consolas, monospace;
+  word-break: break-all;
+}
+
+.connected {
+  font-size: 1.1rem;
+  margin-top: 8px !important;
+}
+
+.connected strong {
+  font-size: 1.6rem;
+}
+
+
+.actions {
+  display: grid;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+/* ---------- QR proyectado ---------- */
+
+.qr-overlay {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.92);
+  z-index: 20;
+}
+
+.qr-card {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  max-width: 1200px;
+}
+
+.qr-big {
+  width: min(70vh, 80vw);
+  background: #fff;
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.big-instructions {
+  font-size: 2rem;
+  font-weight: 600;
+  max-width: 420px;
+}
+
+.big-url {
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 1.6rem;
+}
+
+.big-code {
+  font-size: 2rem;
+}
+
+.big-code strong {
+  letter-spacing: 0.15em;
+}
+
+/* ---------- Conexión ---------- */
+
+.banner {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  padding: 10px 16px;
+  background: #b45309;
+  color: #fff;
+  text-align: center;
+  z-index: 30;
+}
+
+@media (max-width: 800px) {
+  .present {
+    grid-template-columns: 1fr;
+    grid-template-rows: 60vh auto;
+    height: auto;
+  }
+
+  .panel {
+    border-left: 0;
+  }
+}
+
+/* ---------- Pregunta ---------- */
+
+button.accent {
+  background: #16a34a;
+}
+
+button.danger {
+  background: #b91c1c;
+}
+
+.controls #open-question {
+  margin-left: 24px;
+}
+
+.question-bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 14px;
+  background: #14532d;
+  font-size: 1rem;
+}
+
+.question-label {
+  flex: 1;
+  font-weight: 600;
+}
+
+.question-bar strong {
+  font-size: 1.3rem;
+}
+
+.timer {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.timer.urgent {
+  background: #b91c1c;
+}
+
+.question-dialog {
+  border: 0;
+  border-radius: 14px;
+  padding: 24px;
+  background: #1f1f1f;
+  color: #f2f2f2;
+  width: min(440px, 92vw);
+}
+
+.question-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.question-dialog h2 {
+  margin: 0 0 16px;
+}
+
+.question-dialog fieldset {
+  border: 1px solid #3a3a3a;
+  border-radius: 10px;
+  display: grid;
+  gap: 10px;
+  padding: 12px 14px;
+  margin: 0 0 16px;
+}
+
+.question-dialog .row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.question-dialog select {
+  font: inherit;
+  padding: 6px 8px;
+  border-radius: 8px;
+  background: #2a2a2a;
+  color: #fff;
+  border: 1px solid #444;
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+/* Filas fijas: la barra de pregunta puede estar oculta sin que la diapositiva cambie de fila. */
+.stage > .question-bar {
+  grid-row: 1;
+}
+
+.stage > #slide {
+  grid-row: 2;
+}
+
+.stage > .controls {
+  grid-row: 3;
+}
+
+.stage > #answer-grid {
+  grid-row: 2;
+}
+
+/* ---------- Cuadrícula de respuestas ---------- */
+
+.answer-grid {
+  --tile-min: 140px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--tile-min), 1fr));
+  align-content: start;
+  gap: 8px;
+  padding: 10px;
+  overflow-y: auto;
+  min-height: 0;
+  background: #101010;
+}
+
+.tile {
+  position: relative;
+  display: grid;
+  gap: 4px;
+  padding: 4px;
+  border: 2px solid #2e2e2e;
+  border-radius: 8px;
+  background: #1b1b1b;
+  cursor: pointer;
+}
+
+.tile:hover {
+  border-color: #3b82f6;
+}
+
+.tile.offline {
+  opacity: 0.45;
+}
+
+.tile.submitted {
+  border-color: #16a34a;
+}
+
+.tile-board {
+  position: relative;
+  width: 100%;
+  background: #fff center / 100% 100% no-repeat;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.tile-board canvas,
+.big-board canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.tile-board.is-text {
+  aspect-ratio: auto !important;
+  min-height: 60px;
+  max-height: 90px;
+}
+
+.tile-text,
+.big-text {
+  color: #111;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+}
+
+.tile-text {
+  padding: 6px;
+  font-size: 0.8rem;
+  max-height: 90px;
+}
+
+.tile-name {
+  font-size: 0.8rem;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tile-badge {
+  display: none;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 22px;
+  height: 22px;
+  line-height: 22px;
+  text-align: center;
+  border-radius: 50%;
+  background: #16a34a;
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+
+.tile.submitted .tile-badge {
+  display: block;
+}
+
+/* ---------- Respuesta en grande ---------- */
+
+.spotlight {
+  position: fixed;
+  inset: 0;
+  z-index: 15;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  background: #000;
+}
+
+.spotlight-bar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 8px 12px;
+  background: #1b1b1b;
+}
+
+.big-answer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  padding: 12px;
+}
+
+.big-area {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  place-items: center;
+}
+
+.big-board {
+  background: #fff center / 100% 100% no-repeat;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.big-board.is-text {
+  display: grid;
+  place-items: center;
+  padding: 5%;
+}
+
+.big-text {
+  font-size: clamp(1.5rem, 4vw, 4rem);
+  text-align: center;
+}
+
+.big-name {
+  margin: 10px 0 0;
+  text-align: center;
+  font-size: clamp(1.2rem, 3vw, 2.4rem);
+  font-weight: 600;
+}
+
+/* ---------- Clases preparadas ---------- */
+
+a.button {
+  display: inline-block;
+  font: inherit;
+  padding: 10px 16px;
+  border-radius: 8px;
+  background: #3b82f6;
+  color: #fff;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+}
+
+a.button.secondary {
+  background: #333;
+}
+
+.question-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.question-prompt {
+  font-size: 0.95rem;
+  opacity: 0.9;
+  white-space: pre-wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.controls {
+  flex-wrap: wrap;
+}
+
+.prepared-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-left: 12px;
+}
+
+.prepared-chip {
+  max-width: 260px;
+  padding: 8px 12px;
+  background: #1e3a8a;
+  border: 1px solid #3b82f6;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 500;
+}
+
+.prepared-chip.launched {
+  background: #263238;
+  border-color: #455a64;
+  color: #cfd8dc;
+}
+
+.question-dialog .column {
+  display: grid;
+  gap: 6px;
+  margin-top: 14px;
+}
+
+.question-dialog textarea {
+  font: inherit;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: #2a2a2a;
+  color: #fff;
+  border: 1px solid #444;
+  resize: vertical;
+}

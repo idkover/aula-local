@@ -1,0 +1,48 @@
+/* Ventana de proyección: fondo negro, solo diapositiva o respuesta en grande. */
+html,
+body.projector {
+  background: #000;
+  overflow: hidden;
+}
+
+.projector #slide {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  object-fit: contain;
+}
+
+.projector-big {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  padding: 2vh 2vw;
+}
+
+.projector-message {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  margin: 0;
+  padding: 24px;
+  text-align: center;
+  font-size: clamp(1.4rem, 3vw, 2.4rem);
+  color: #cfcfcf;
+}
+
+.projector-fs {
+  position: fixed;
+  top: 8px;
+  right: 8px;
+  z-index: 5;
+  padding: 4px 10px;
+  background: rgba(255, 255, 255, 0.15);
+  opacity: 0.12;
+  transition: opacity 0.2s;
+}
+
+.projector-fs:hover,
+.projector-fs:focus-visible {
+  opacity: 1;
+}

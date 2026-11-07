@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Aula · Mis clases</title>
+  </head>
+  <body>
+    <!-- ========== Biblioteca ========== -->
+    <main id="library" class="lib">
+      <header class="lib-header">
+        <h1>Mis clases</h1>
+        <div class="lib-actions">
+          <button id="new-class" type="button" class="accent">Nueva clase</button>
+          <button id="quick-class" type="button" class="secondary">Clase rápida</button>
+          <input id="quick-pdf" type="file" accept="application/pdf,.pdf" hidden />
+          <button id="pin-open" type="button" class="secondary discreet" hidden></button>
+        </div>
+      </header>
+
+      <form id="new-class-form" class="panel-card" hidden>
+        <h2>Nueva clase</h2>
+        <label class="field">
+          Título
+          <input id="new-title" name="title" type="text" maxlength="120" placeholder="Ej. Fracciones, 5.º A" autocomplete="off" />
+        </label>
+        <label class="field">
+          Presentación en PDF
+          <input id="new-pdf" name="pdf" type="file" accept="application/pdf,.pdf" required />
+        </label>
+        <div class="form-actions">
+          <button id="new-cancel" type="button" class="secondary">Cancelar</button>
+          <button id="new-submit" type="submit" class="accent">Crear clase</button>
+        </div>
+      </form>
+
+      <p id="library-status" class="status" role="status" hidden></p>
+      <p id="library-error" class="error-msg" role="alert" hidden></p>
+      <div id="update-banner" class="update-banner" role="status" hidden>
+        <span id="update-text"></span>
+        <a id="update-link" href="#" target="_blank" rel="noopener">Descargar</a>
+        <span id="update-notes" class="update-notes" hidden></span>
+      </div>
+
+      <section id="class-list" class="class-grid" aria-label="Clases"></section>
+
+      <section id="history" class="panel-card" hidden></section>
+
+      <footer class="lib-footer">
+        <span>aula-local<span id="app-version"></span></span>
+        · <a href="/teacher/guia-red">Guía de red</a>
+        · <a href="/teacher/conectar">Conectar alumnos</a>
+      </footer>
+    </main>
+
+    <!-- ========== Editor ========== -->
+    <main id="editor" class="ed" hidden>
+      <header class="ed-header">
+        <button id="ed-back" type="button" class="secondary">&larr; Mis clases</button>
+        <input id="ed-title" type="text" maxlength="120" placeholder="Título de la clase" aria-label="Título de la clase" autocomplete="off" />
+        <span id="ed-status" class="save-status muted" role="status"></span>
+        <button id="ed-save" type="button" class="accent">Guardar</button>
+        <button id="ed-start" type="button">Dar clase</button>
+      </header>
+      <p id="ed-error" class="error-msg ed-error" role="alert" hidden></p>
+
+      <div class="ed-body">
+        <nav id="slide-strip" class="slide-strip" aria-label="Diapositivas"></nav>
+
+        <section class="ed-main">
+          <div class="ed-stage">
+            <p id="slide-caption" class="muted"></p>
+            <div class="ed-slide-box"><img id="slide-main" alt="Diapositiva seleccionada" /></div>
+          </div>
+
+          <div class="ed-side">
+            <h2>Preguntas de esta diapositiva</h2>
+            <ol id="prepared-list" class="prepared-list"></ol>
+
+            <form id="pq-form" class="panel-card">
+              <h3 id="pq-heading">Nueva pregunta</h3>
+              <fieldset>
+                <legend>Tipo de respuesta</legend>
+                <label><input type="radio" name="type" value="overSlide" checked /> Pizarrón sobre la diapositiva</label>
+                <label><input type="radio" name="type" value="blank" /> Pizarrón en blanco</label>
+                <label><input type="radio" name="type" value="text" /> Respuesta corta de texto</label>
+              </fieldset>
+              <label class="row">
+                Límite de tiempo
+                <select name="time">
+                  <option value="">Sin límite</option>
+                  <option value="30">30 segundos</option>
+                  <option value="60">1 minuto</option>
+                  <option value="120">2 minutos</option>
+                  <option value="300">5 minutos</option>
+                </select>
+              </label>
+              <label class="field">
+                Enunciado (opcional): lo verán los alumnos arriba del pizarrón
+                <textarea name="prompt" rows="3" maxlength="500"></textarea>
+              </label>
+              <div class="form-actions">
+                <button id="pq-cancel" type="button" class="secondary" hidden>Cancelar</button>
+                <button id="pq-submit" type="submit" class="accent">Agregar pregunta</button>
+              </div>
+            </form>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- ========== PIN del profesor (crear / cambiar) ========== -->
+    <dialog id="pin-dialog" class="pin-dialog" aria-labelledby="pin-title">
+      <form id="pin-form" autocomplete="off">
+        <h2 id="pin-title"></h2>
+        <p id="pin-explain" class="muted"></p>
+        <label id="pin-current-field" class="field" hidden>
+          PIN actual
+          <input id="pin-current" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="8" autocomplete="off" />
+        </label>
+        <label class="field">
+          <span id="pin-new-label">Nuevo PIN (4 a 8 dígitos)</span>
+          <input id="pin-new" type="password" inputmode="numeric" pattern="[0-9]*" minlength="4" maxlength="8" autocomplete="off" required />
+        </label>
+        <label class="field">
+          Repite el PIN
+          <input id="pin-confirm" type="password" inputmode="numeric" pattern="[0-9]*" minlength="4" maxlength="8" autocomplete="off" required />
+        </label>
+        <p id="pin-dialog-error" class="error-msg" role="alert" hidden></p>
+        <div class="form-actions">
+          <button id="pin-cancel" type="button" class="secondary">Ahora no</button>
+          <button id="pin-submit" type="submit" class="accent">Guardar PIN</button>
+        </div>
+      </form>
+    </dialog>
+
+    <script type="module" src="./library.ts"></script>
+  </body>
+</html>

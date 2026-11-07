@@ -1,0 +1,7 @@
+aula-local - avisos de licencia / license notice
+
+aula-local es software libre con licencia MIT; el texto completo está en LICENSE.txt.
+aula-local is free software under the MIT License; full text in LICENSE.txt.
+
+Incluye Node.js (licencia MIT, https://nodejs.org; texto completo en node\LICENSE) y paquetes de npm con sus licencias en app\node_modules\*\LICENSE.
+Includes Node.js (MIT License, https://nodejs.org; full text in node\LICENSE) and npm packages; their licenses are in app\node_modules\*\LICENSE.

@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Aula · Respuestas de la clase</title>
+  </head>
+  <body>
+    <div class="summary">
+      <header class="summary-head">
+        <div class="summary-heading">
+          <h1 id="summary-title">Cargando…</h1>
+          <p id="summary-meta" class="muted"></p>
+        </div>
+        <div class="summary-actions">
+          <div class="export-box" id="export-box" hidden>
+            <a id="export-zip" class="button" href="#" download>Descargar respuestas (ZIP)</a>
+            <a id="export-csv-comma" class="export-alt" href="#" download
+              title="Si Excel junta todo en una sola columna, usa esta versión (separador coma)">CSV con comas</a>
+          </div>
+          <a id="back-link" class="button secondary" href="/teacher/clases">Mis clases</a>
+        </div>
+      </header>
+
+      <p id="summary-note" class="summary-note" role="status" hidden></p>
+
+      <div id="summary-error" class="summary-error" role="alert" hidden>
+        <p id="summary-error-text"></p>
+        <a class="button" href="/teacher/clases">Ir a Mis clases</a>
+      </div>
+
+      <main id="summary-main" class="summary-main" hidden>
+        <nav class="q-nav" aria-label="Preguntas de la clase">
+          <ol id="question-list" class="question-list"></ol>
+          <p id="question-empty" class="muted q-empty" hidden>En esta clase no se lanzó ninguna pregunta</p>
+        </nav>
+
+        <section id="question-view" class="question-view" aria-label="Respuestas de la pregunta" hidden>
+          <header class="qv-head">
+            <div class="qv-text">
+              <p id="q-header-meta" class="label"></p>
+              <p id="q-header-prompt" class="qv-prompt"></p>
+            </div>
+            <button id="toggle-names" type="button" class="secondary">Mostrar nombres</button>
+          </header>
+          <p id="qv-status" class="muted qv-status" role="status" hidden></p>
+          <div id="answer-grid" class="answer-grid"></div>
+        </section>
+
+        <p id="question-hint" class="muted question-hint" hidden>Elige una pregunta para ver las respuestas.</p>
+      </main>
+    </div>
+
+    <div id="spotlight" class="spotlight" role="dialog" aria-label="Respuesta en grande" hidden>
+      <div class="spotlight-bar">
+        <span id="spotlight-pos" class="spotlight-pos"></span>
+        <button id="spotlight-prev" type="button" class="secondary" aria-label="Alumno anterior">◀</button>
+        <button id="spotlight-next" type="button" class="secondary" aria-label="Alumno siguiente">▶</button>
+        <button id="spotlight-name" type="button" class="secondary">Mostrar nombre</button>
+        <button id="spotlight-close" type="button">Cerrar (Esc)</button>
+      </div>
+      <div id="spotlight-body" class="big-answer"></div>
+    </div>
+
+    <script type="module" src="./summary.ts"></script>
+  </body>
+</html>

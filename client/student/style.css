@@ -1,0 +1,514 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  background: #111;
+  color: #f4f4f4;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  -webkit-text-size-adjust: 100%;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.screen {
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* ---------- Unirse ---------- */
+
+#join {
+  display: grid;
+  place-items: center;
+  padding: 24px 16px;
+}
+
+#join-form {
+  width: 100%;
+  max-width: 360px;
+  display: grid;
+  gap: 16px;
+}
+
+#join-form h1 {
+  margin: 0 0 8px;
+  font-size: 1.6rem;
+}
+
+#join-form label {
+  display: grid;
+  gap: 6px;
+  font-size: 0.95rem;
+  color: #c9c9c9;
+}
+
+#join-form input {
+  font: inherit;
+  font-size: 1.15rem; /* ≥16 px evita el zoom automático de iOS al enfocar */
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #444;
+  background: #1d1d1d;
+  color: #fff;
+}
+
+#code {
+  letter-spacing: 0.4em;
+  font-variant-numeric: tabular-nums;
+}
+
+#join-form button {
+  font: inherit;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 14px;
+  border: 0;
+  border-radius: 10px;
+  background: #3b82f6;
+  color: #fff;
+}
+
+#join-form button:disabled {
+  opacity: 0.6;
+}
+
+.error {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #4c1d1d;
+  color: #fecaca;
+}
+
+.hint {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #9a9a9a;
+  line-height: 1.4;
+}
+
+/* ---------- Diapositiva ---------- */
+
+#slides {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: #000;
+}
+
+#slide {
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  object-fit: contain;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.slide-status {
+  position: absolute;
+  margin: 0;
+  color: #aaa;
+}
+
+.counter {
+  position: absolute;
+  left: max(10px, env(safe-area-inset-left));
+  bottom: max(8px, env(safe-area-inset-bottom));
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.55);
+  font-variant-numeric: tabular-nums;
+}
+
+.fullscreen {
+  position: absolute;
+  right: max(8px, env(safe-area-inset-right));
+  bottom: max(6px, env(safe-area-inset-bottom));
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  font-size: 1.2rem;
+}
+
+/* ---------- Conexión ---------- */
+
+.banner {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  padding: 10px 16px;
+  padding-top: max(10px, env(safe-area-inset-top));
+  background: #b45309;
+  color: #fff;
+  font-size: 0.95rem;
+  text-align: center;
+  z-index: 10;
+}
+
+/* ---------- Pizarrón ---------- */
+
+/* Mientras se dibuja: sin rebote, sin "jalar para recargar", sin selección ni menú de pulsación larga. */
+html.drawing,
+html.drawing body {
+  overflow: hidden;
+  overscroll-behavior: none;
+  position: fixed;
+  inset: 0;
+}
+
+.board-screen {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  background: #1a1a1a;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  touch-action: none;
+}
+
+.board-top,
+.text-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  padding-top: max(8px, env(safe-area-inset-top));
+}
+
+/* ---------- Enunciado de la pregunta ---------- */
+
+.q-prompt {
+  margin: 0;
+  padding: 6px 12px;
+  background: #222;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  line-height: 1.3;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  /* Unas 3 líneas; si hay más, se desplaza dentro del recuadro y el pizarrón conserva la altura. */
+  max-height: 4.6em;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
+}
+
+.board-head > .q-prompt {
+  margin: 0 12px 4px;
+}
+
+.text-form > .q-prompt {
+  color: #e8e8e8;
+}
+
+.answer-status {
+  flex: 1;
+  font-size: 0.85rem;
+  color: #c9c9c9;
+  line-height: 1.25;
+}
+
+/* Sin conexión: aviso tranquilo en el encabezado (el pizarrón sigue disponible). */
+.answer-status.is-offline {
+  color: #fcd34d;
+}
+
+.timer {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  font-size: 1.05rem;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #333;
+}
+
+.timer.urgent {
+  background: #b91c1c;
+}
+
+.submit {
+  font: inherit;
+  font-weight: 700;
+  padding: 10px 18px;
+  border: 0;
+  border-radius: 10px;
+  background: #16a34a;
+  color: #fff;
+  touch-action: manipulation;
+}
+
+.submit:disabled {
+  background: #3a3a3a;
+  color: #bbb;
+}
+
+.board-area {
+  display: grid;
+  place-items: center;
+  padding: 4px;
+  overflow: hidden;
+}
+
+.board-frame {
+  position: relative;
+  background: #fff;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 0 0 1px #444;
+}
+
+.board-frame > canvas,
+.board-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.board-bg {
+  object-fit: fill;
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+
+.board-live {
+  touch-action: none;
+  cursor: crosshair;
+}
+
+.board-locked {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(0, 0, 0, 0.45);
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px 14px;
+  padding: 8px;
+  padding-bottom: max(8px, env(safe-area-inset-bottom));
+  background: #111;
+}
+
+.tool-group {
+  display: flex;
+  gap: 4px;
+}
+
+.tool,
+.swatch {
+  width: 42px;
+  height: 42px;
+  border: 0;
+  border-radius: 10px;
+  background: #262626;
+  color: #eee;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  touch-action: manipulation;
+}
+
+.tool svg {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.tool:disabled {
+  opacity: 0.35;
+}
+
+.tool[aria-pressed='true'],
+.swatch[aria-pressed='true'] {
+  outline: 3px solid #60a5fa;
+  outline-offset: -3px;
+}
+
+.swatch::after {
+  content: '';
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--swatch);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.25);
+}
+
+.size::after {
+  content: '';
+  width: var(--dot);
+  height: var(--dot);
+  border-radius: 50%;
+  background: currentColor;
+}
+
+/* Celular acostado: herramientas en una columna a la derecha para dejarle altura al pizarrón. */
+@media (orientation: landscape) and (max-height: 560px) {
+  .board-screen {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-rows: auto minmax(0, 1fr);
+  }
+
+  .board-head {
+    grid-column: 1;
+  }
+
+  .board-top {
+    padding-top: 6px;
+  }
+
+  /* Acostado sobra poca altura: el enunciado se reduce a unas 2 líneas. */
+  .q-prompt {
+    font-size: 0.85rem;
+    max-height: 3.1em;
+  }
+
+  .board-area {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .toolbar {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    gap: 8px 4px;
+    padding-right: max(8px, env(safe-area-inset-right));
+  }
+
+  .tool-group {
+    flex-wrap: wrap;
+    width: 88px;
+    justify-content: center;
+  }
+}
+
+/* ---------- Respuesta de texto ---------- */
+
+.text-screen {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  height: 100vh;
+  height: 100dvh;
+  background: #111;
+}
+
+.text-slide {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  object-fit: contain;
+  background: #000;
+}
+
+.text-form {
+  display: grid;
+  gap: 6px;
+  padding: 10px 12px;
+  padding-bottom: max(10px, env(safe-area-inset-bottom));
+}
+
+.text-form label {
+  font-size: 0.9rem;
+  color: #c9c9c9;
+}
+
+.text-form textarea {
+  font: inherit;
+  font-size: 1.05rem;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #444;
+  background: #1d1d1d;
+  color: #fff;
+  resize: none;
+}
+
+.text-actions {
+  padding: 0;
+}
+
+/* ---------- Aviso breve ---------- */
+
+.toast {
+  position: fixed;
+  left: 50%;
+  top: max(64px, calc(env(safe-area-inset-top) + 64px));
+  transform: translateX(-50%);
+  padding: 10px 18px;
+  border-radius: 18px;
+  background: rgba(30, 30, 30, 0.95);
+  color: #fff;
+  font-weight: 600;
+  z-index: 20;
+  pointer-events: none;
+  max-width: calc(100vw - 32px);
+  text-align: center;
+  line-height: 1.3;
+}
+
+/* ---------- Fin de la clase ---------- */
+
+.ended {
+  display: grid;
+  place-items: center;
+  padding: 24px 16px;
+  text-align: center;
+}
+
+.ended-card {
+  display: grid;
+  gap: 14px;
+  max-width: 360px;
+}
+
+.ended-card h1 {
+  margin: 0;
+  font-size: 1.7rem;
+}
+
+.ended-thanks {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.rejoin {
+  font: inherit;
+  font-size: 1.05rem;
+  font-weight: 600;
+  padding: 14px;
+  border: 0;
+  border-radius: 10px;
+  background: #3b82f6;
+  color: #fff;
+}
