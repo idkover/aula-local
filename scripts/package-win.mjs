@@ -189,6 +189,8 @@ async function main() {
 
   // 2. Compilación.
   paso(2, 'Compilando (npm run build)');
+  // tsc no borra lo que ya no existe en el código: sin esto, archivos viejos de dist/ entrarían al instalador.
+  rmSync(path.join(RAIZ, 'dist'), { recursive: true, force: true });
   ejecutarShell('npm run build', RAIZ);
   for (const requerido of [path.join(RAIZ, 'dist', 'server', 'index.js'), path.join(RAIZ, 'dist', 'client')]) {
     if (!existsSync(requerido)) fallar(`Falta ${requerido} tras la compilación.`);

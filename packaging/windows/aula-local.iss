@@ -44,6 +44,11 @@ es.FinishedLabel=aula-local quedó instalado. Al abrirlo aparecerá un icono jun
 [Tasks]
 Name: "desktopicon"; Description: "Crear un acceso directo en el escritorio"; GroupDescription: "Accesos directos:"; Flags: checkedonce
 
+[InstallDelete]
+; El código compilado de la versión anterior se reemplaza completo, para no dejar archivos que ya no existen.
+; Los datos del profesor viven en %LOCALAPPDATA%\aula-local y no se tocan.
+Type: filesandordirs; Name: "{app}\app\dist"
+
 [Files]
 Source: "{#StageDir}\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 
